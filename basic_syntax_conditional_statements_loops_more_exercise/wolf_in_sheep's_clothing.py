@@ -1,9 +1,10 @@
-sheep_str = input().split(", ")
+queue_of_animals = input().split(', ')
 
-if sheep_str.pop() == 'wolf':
-    print("Please go away and stop eating my sheep")
+if queue_of_animals[-1] == 'wolf':
+    print('Please go away and stop eating my sheep')
+    exit()
 
-sheep_str_rev = sheep_str[::-1]
-for i in range(len(sheep_str_rev)):
-    if sheep_str_rev[i] != 'sheep':
-        print(f"Oi! Sheep number {i + 1}! You are about to be eaten by a wolf!")
+for animal in range(len(queue_of_animals), -1, -1):
+    if queue_of_animals[animal-1] == 'wolf':
+        print(f'Oi! Sheep number {len(queue_of_animals) - animal}! You are about to be eaten by a wolf!')
+        break
