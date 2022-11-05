@@ -1,11 +1,7 @@
-text = input().lower()
+beach_string = input().lower()
+list_of_words = ['sand', 'water', 'fish', 'sun']
+count = 0
+for word in list_of_words:
+    count += beach_string.count(word)
 
-my_list = ["sand", "water", "fish", "sun"]
-counter = 0
-
-for item in my_list:
-    if item in text:
-        word_count_txt = text.count(item)
-        counter += word_count_txt
-
-print(counter)
+print(count)
