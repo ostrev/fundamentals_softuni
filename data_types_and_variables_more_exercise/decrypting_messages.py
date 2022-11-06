@@ -1,7 +1,9 @@
-key = int(input())
-number_lines = int(input())
-decrypt = ''
-for i in range(1, number_lines+1):
-    char = input()
-    decrypt += chr((ord(char)) + key)
-print(decrypt)
+decrypting_key = int(input())
+number_of_lines = int(input())
+decrypting_massage = ''
+
+for _ in range(number_of_lines):
+    line = input()
+    decrypting_massage += chr(ord(line) + decrypting_key)
+
+print(decrypting_massage)
