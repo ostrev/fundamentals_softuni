@@ -35,7 +35,6 @@ print(f"Best candidate is {best_candidate} with total {max_points} points.")
 sorted_dictionary = dict(sorted(user_contests_points_dict.items(), key=lambda kvp: kvp[0]))
 print('Ranking:')
 for user, contest in sorted_dictionary.items():
-    sorted_contest = sorted(contest.items(), key=lambda kvp: -kvp[1])
     print(user)
-    for contest, points in sorted_contest:
+    for contest, points in sorted(contest.items(), key=lambda kvp: -kvp[1]):
         print(f'#  {contest} -> {points}')
