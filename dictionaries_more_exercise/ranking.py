@@ -1,56 +1,41 @@
-first_type = {}
-submissions = {}
-best_candidate = {}
-command = input()
+contests_dictionary = {}
+first_commands = input()
+while first_commands != "end of contests":
+    contest, password = first_commands.split(':')
+    contests_dictionary[contest] = password
+    first_commands = input()
 
-while command != 'end of contests':
-    contests, password = command.split(':')
-    first_type[contests] = password
-
-    command = input()
-
+user_contests_points_dict = {}
 command = input()
 while command != 'end of submissions':
-    contests, password, username, points = command.split('=>')
-    if contests in first_type and password == first_type[contests]:
-        if username not in submissions:
-            submissions[username] = {}
-            submissions[username][contests] = int(points)
+    contest, password, username, points = command.split('=>')
+    if contest in contests_dictionary and contests_dictionary[contest] == password:
+        if username not in user_contests_points_dict:
+            user_contests_points_dict[username] = {}
+            user_contests_points_dict[username][contest] = int(points)
         else:
-            if contests not in submissions[username]:
-                submissions[username][contests] = int(points)
+            if contest not in user_contests_points_dict[username]:
+                user_contests_points_dict[username][contest] = int(points)
             else:
-                if int(points) > submissions[username][contests]:
-                    submissions[username][contests] = int(points)
-
+                if int(points) > user_contests_points_dict[username][contest]:
+                    user_contests_points_dict[username][contest] = int(points)
     command = input()
 
-for username_dic in submissions:
-    sum_value = submissions[username_dic].values()
-    total = sum(sum_value)
-    best_candidate[username_dic] = total
+max_points = 0
+total_points = 0
+best_candidate = ''
+for user, contest in user_contests_points_dict.items():
+    total_points = sum(user_contests_points_dict[user].values())
+    if total_points > max_points:
+        max_points = total_points
+        best_candidate = user
+        total_points = 0
+print(f"Best candidate is {best_candidate} with total {max_points} points.")
 
-max_value = max(best_candidate.values())
-best_name = ""
-for name, points in best_candidate.items():
-    if max_value == points:
-        best_name = name
-print(f'Best candidate is {best_name} with total {max_value} points.')
-sort_submission = dict(sorted(submissions.items(), key=lambda kvp: kvp[0]))
-last_dict = {}
-for k, value in sort_submission.items():
-    last_dict[k] = {}
-    sort_submission_two = sorted(value.items(), key=lambda kvp: kvp[1], reverse=True)
-    last_dict[k] = dict(sort_submission_two)
+sorted_dictionary = dict(sorted(user_contests_points_dict.items(), key=lambda kvp: kvp[0]))
 print('Ranking:')
-for k, v in last_dict.items():
-    print(k)
-    for con, poi in v.items():
-        print(f'#  {con} -> {poi}')
-
-
-print('Ranking:')
-for k, v in sorted(submissions.items(), key=lambda x: x[0]):
-    print(f'{k}')
-    for kk,vv in sorted(v.items(), key=lambda x: -x[1]):
-        print(f'#  {kk} -> {vv}')
+for user, contest in sorted_dictionary.items():
+    sorted_contest = sorted(contest.items(), key=lambda kvp: -kvp[1])
+    print(user)
+    for contest, points in sorted_contest:
+        print(f'#  {contest} -> {points}')
