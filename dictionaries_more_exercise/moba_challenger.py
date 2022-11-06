@@ -1,53 +1,42 @@
-command = input()
-players_pool = {}
-total_skill = {}
-is_break =False
-while command != 'Season end':
-    if ' -> ' in command:
-        player, position, skill = command.split(' -> ')
-        skill = int(skill)
-        if player not in players_pool:
-            players_pool[player] = {}
-            if position not in players_pool[player]:
-                players_pool[player][position] = skill
-            else:
-                if skill > players_pool[player][position]:
-                    players_pool[player][position] = skill
+input_line = input()
+player_position_skills_dict = {}
+list_of_position = []
+total_skills = {}
+while input_line != 'Season end':
+    if '->' in input_line:
+        player, position, skills = input_line.split(' -> ')
+
+        if player not in player_position_skills_dict:
+            player_position_skills_dict[player] = {}
+            player_position_skills_dict[player][position] = int(skills)
         else:
-            if position not in players_pool[player]:
-                players_pool[player][position] = skill
+            if position not in player_position_skills_dict[player]:
+                player_position_skills_dict[player][position] = int(skills)
             else:
-                if skill > players_pool[player][position]:
-                    players_pool[player][position] = skill
-    elif' vs ' in command:
-        first_pl, second_pl = command.split(' vs ')
-        if first_pl in players_pool and second_pl in players_pool:
+                if int(skills) > player_position_skills_dict[player][position]:
+                    player_position_skills_dict[player][position] = int(skills)
+    else:
+        player_one, player_two = input_line.split(' vs ')
+        if player_one in player_position_skills_dict and player_two in player_position_skills_dict:
+            for position in player_position_skills_dict[player_one].items():
+                list_of_position.append(position[0])
+            for position in player_position_skills_dict[player_two].items():
+                if position[0] in list_of_position:
+                    if player_position_skills_dict[player_one][position[0]] >\
+                            player_position_skills_dict[player_two][position[0]]:
+                        player_position_skills_dict.pop(player_two)
+                    elif player_position_skills_dict[player_one][position[0]] <\
+                            player_position_skills_dict[player_two][position[0]]:
+                        player_position_skills_dict.pop(player_one)
+                    list_of_position.clear()
+    input_line = input()
 
-            for k in players_pool[first_pl]:
-                for kk in players_pool[second_pl]:
-                    if k == kk:
+sorted_total_skills = {}
+for player, position_dict in player_position_skills_dict.items():
+    total_skills[player] = sum(position_dict.values())
+    sorted_total_skills = dict(sorted(total_skills.items(), key=lambda kvpt: (-kvpt[1], kvpt[0])))
 
-                        total_one = sum(players_pool[first_pl].values())
-                        total_two = sum(players_pool[second_pl].values())
-                        if total_one > total_two:
-                            del players_pool[second_pl]
-                            is_break = True
-                            break
-                        elif total_one < total_two:
-                            del players_pool[first_pl]
-                            is_break = True
-                            break
-                if is_break:
-                    break
-    command = input()
-
-for k, v in players_pool.items():
-    for kk, vv in v.items():
-        total_skill[k] = sum(players_pool[k].values())
-total_skill_sor = dict(sorted(total_skill.items(), key=lambda kvpt: (-kvpt[1], kvpt[0])))
-for player, tot_sk in total_skill_sor.items():
-    print(f'{player}: {tot_sk} skill')
-    for k, v in sorted(players_pool[player].items(), key=lambda kvp: (-kvp[1], kvp[0])):
-        print(f'- {k} <::> {v}')
-
-
+for player, total_skills in sorted_total_skills.items():
+    print(f'{player}: {total_skills} skill')
+    for position, skills in sorted(player_position_skills_dict[player].items(), key=lambda kvp: (-kvp[1], kvp[0])):
+        print(f'- {position} <::> {skills}')
