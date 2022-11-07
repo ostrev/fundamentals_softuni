@@ -32,5 +32,5 @@ for color, names in sorted_head_name_dictionary:
         x = f'({color}) {name}'
         new_dwarf_dictionary[x] = colorname_physics_dictionary[x]
 
-for k, v in sorted(new_dwarf_dictionary.items(), key=lambda kvpt: -kvpt[1]):
+for k, v in sorted(new_dwarf_dictionary.items(), key=lambda kvp: -kvp[1]):
     print(f'{k} <-> {v}')
