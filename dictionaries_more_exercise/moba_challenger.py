@@ -38,5 +38,5 @@ for player, position_dict in player_position_skills_dict.items():
 
 for player, total_skills in sorted_total_skills.items():
     print(f'{player}: {total_skills} skill')
-    for position, skills in sorted(player_position_skills_dict[player].items(), key=lambda kvp: (-kvp[1], kvp[0])):
+    for position, skills in sorted(player_position_skills_dict[player].items(), key=lambda kvp: (-kvpt[1], kvpt[0])):
         print(f'- {position} <::> {skills}')
