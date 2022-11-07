@@ -1,32 +1,36 @@
-command = input()
-dwarfs = {}
-hat_name = {}
-new_dwarfs = {}
-while command != 'Once upon a time':
-    name, hat_color, physics = command.split(' <:> ')
-    color_name = f'({hat_color}) {name}'
-    physics = int(physics)
+input_line = input()
+dwarf_dictionary = {}
+colorname_physics_dictionary = {}
+new_dwarf_dictionary = {}
 
-    if hat_color not in hat_name:
-        hat_name[hat_color] = [name]
+while input_line != "Once upon a time":
+    name_of_dwarf, head_color_dwarf, physics_of_dwarf = input_line.split(' <:> ')
+    if head_color_dwarf not in dwarf_dictionary:
+        dwarf_dictionary[head_color_dwarf] = {}
+        dwarf_dictionary[head_color_dwarf][name_of_dwarf] = int(physics_of_dwarf)
+    elif name_of_dwarf not in dwarf_dictionary[head_color_dwarf]:
+        dwarf_dictionary[head_color_dwarf][name_of_dwarf] = int(physics_of_dwarf)
     else:
-        if name not in hat_name[hat_color]:
-            hat_name[hat_color].append(name)
+        if int(physics_of_dwarf) > dwarf_dictionary[head_color_dwarf][name_of_dwarf]:
+            dwarf_dictionary[head_color_dwarf][name_of_dwarf] = int(physics_of_dwarf)
 
-    if color_name not in dwarfs:
-        dwarfs[color_name] = physics
-    else:
-        if physics > dwarfs[color_name]:
-            dwarfs[color_name] = physics
+    input_line = input()
 
-    command = input()
-sort_hat_name = sorted(hat_name.items(), key=lambda x: len(x[1]), reverse=True)
+head_name_dictionary = {}
 
+for head_color, value in dwarf_dictionary.items():
+    head_name_dictionary[head_color] = []
+    for name, physics in value.items():
+        head_name_dictionary[head_color].append(name)
+        first_str = f'({head_color}) {name}'
+        colorname_physics_dictionary[first_str] = physics
 
-for color, names in sort_hat_name:
+sorted_head_name_dictionary = sorted(head_name_dictionary.items(), key=lambda x: -len(x[1]))
+
+for color, names in sorted_head_name_dictionary:
     for name in names:
-        dr = f"({color}) {name}"
-        new_dwarfs[dr] = dwarfs[dr]
+        x = f'({color}) {name}'
+        new_dwarf_dictionary[x] = colorname_physics_dictionary[x]
 
-for k, v in sorted(new_dwarfs.items(), key=lambda kvpt: -kvpt[1]):
+for k, v in sorted(new_dwarf_dictionary.items(), key=lambda kvpt: -kvpt[1]):
     print(f'{k} <-> {v}')
