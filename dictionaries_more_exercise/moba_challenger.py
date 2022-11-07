@@ -34,7 +34,7 @@ while input_line != 'Season end':
 sorted_total_skills = {}
 for player, position_dict in player_position_skills_dict.items():
     total_skills[player] = sum(position_dict.values())
-    sorted_total_skills = dict(sorted(total_skills.items(), key=lambda kvpt: (-kvpt[1], kvpt[0])))
+    sorted_total_skills = dict(sorted(total_skills.items(), key=lambda kvpt: (-kvp[1], kvp[0])))
 
 for player, total_skills in sorted_total_skills.items():
     print(f'{player}: {total_skills} skill')
