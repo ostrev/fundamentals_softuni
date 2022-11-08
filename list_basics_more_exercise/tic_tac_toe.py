@@ -5,8 +5,6 @@ winner_0 = False
 winner_1 = False
 winner_2 = False
 
-
-# rows check
 if first_line[0] == second_line[0] and first_line[0] == third_line[0]:
     if first_line[0] == '1':
         winner_1 = True
@@ -29,8 +27,6 @@ if first_line[2] == second_line[2] and first_line[2] == third_line[2]:
     else:
         winner_0 = True
 
-
-# lines check
 if first_line[0] == first_line[1] and first_line[0] == first_line[2]:
     if first_line[0] == '1':
         winner_1 = True
@@ -52,8 +48,6 @@ if third_line[0] == third_line[1] and third_line[0] == third_line[2]:
         winner_2 = True
     else:
         winner_0 = True
-
-# diagonals check
 
 if first_line[0] == second_line[1] and first_line[0] == third_line[2]:
     if first_line[0] == '1':
