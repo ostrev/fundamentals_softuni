@@ -25,6 +25,4 @@ else:
     winner = 'right'
     total_time = right_car_time
 
-# print(left_car_time)
-# print(right_car_time)
 print(f'The winner is {winner} with total time: {total_time:.1f}')
