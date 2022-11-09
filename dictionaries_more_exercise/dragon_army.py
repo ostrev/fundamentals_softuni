@@ -10,20 +10,20 @@ def check_for_null(damage_check, health_check, armor_check, default):
 
 number_of_line = int(input())
 default_value = [45, 250, 10]
-dict = {}
+dictionary_of_dragons = {}
 for _ in range(number_of_line):
-    type, name, damage, health, armor = input().split()
-    if type not in dict:
-        dict[type] = {}
+    type_of_dragon, name, damage, health, armor = input().split()
+    if type_of_dragon not in dictionary_of_dragons:
+        dictionary_of_dragons[type_of_dragon] = {}
         damage, health, armor = check_for_null(damage, health, armor, default_value)
-        dict[type][name] = [int(damage), int(health), int(armor)]
+        dictionary_of_dragons[type_of_dragon][name] = [int(damage), int(health), int(armor)]
     else:
         damage, health, armor = check_for_null(damage, health, armor, default_value)
-        dict[type][name] = [int(damage), int(health), int(armor)]
+        dictionary_of_dragons[type_of_dragon][name] = [int(damage), int(health), int(armor)]
 
 damage, health, armor = 0, 0, 0
 string_for_print = ''
-for key, value in dict.items():
+for key, value in dictionary_of_dragons.items():
     val = sorted(value.items(), key=lambda kvp: kvp[0])
     for name, list_physics in val:
         damage += list_physics[0]
