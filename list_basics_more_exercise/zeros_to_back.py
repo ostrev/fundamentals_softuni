@@ -6,4 +6,4 @@ while '0' in data:
 for _ in range(counter):
     data.append('0')
 
-print(data)
+print([int(s) for s in data])
