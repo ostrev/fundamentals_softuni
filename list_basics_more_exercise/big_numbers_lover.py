@@ -1,6 +1,3 @@
-string_input = input().split()
-
-string_input.sort(reverse=True)
-# print(string_input)
-
-print(''.join(string_input))
+numbers = input().split()
+sorted_list = sorted(numbers, reverse=True)
+print(''.join(sorted_list))
