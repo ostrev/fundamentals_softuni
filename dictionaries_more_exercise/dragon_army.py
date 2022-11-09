@@ -1,8 +1,25 @@
-dict = {
-    'Red': {'Bazgargal': [100, 2500, 25], 'Obsidion': [220, 2200, 35]},
-    'Black': {'Dargonax': [200, 3500, 18]},
-    'Blue': {'Kerizsa': [60, 2100, 20], 'Algordox': [65, 1800, 50]}
-        }
+def check_for_null(damage_check, health_check, armor_check, default):
+    if damage_check == 'null':
+        damage_check = default[0]
+    if health_check == 'null':
+        health_check = default[1]
+    if armor_check == 'null':
+        armor_check = default[2]
+    return damage_check, health_check, armor_check
+
+number_of_line = int(input())
+default_value = [45, 250, 10]
+dict = {}
+for _ in range(number_of_line):
+    type, name, damage, health, armor = input().split()
+    if type not in dict:
+        dict[type] = {}
+        damage, health, armor = check_for_null(damage, health, armor, default_value)
+        dict[type][name] = [int(damage), int(health), int(armor)]
+    else:
+        damage, health, armor = check_for_null(damage, health, armor, default_value)
+        dict[type][name] = [int(damage), int(health), int(armor)]
+
 
 damage = 0
 health = 0
