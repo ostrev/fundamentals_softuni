@@ -7,6 +7,7 @@ def check_for_null(damage_check, health_check, armor_check, default):
         armor_check = default[2]
     return damage_check, health_check, armor_check
 
+
 number_of_line = int(input())
 default_value = [45, 250, 10]
 dict = {}
@@ -20,10 +21,7 @@ for _ in range(number_of_line):
         damage, health, armor = check_for_null(damage, health, armor, default_value)
         dict[type][name] = [int(damage), int(health), int(armor)]
 
-
-damage = 0
-health = 0
-armor = 0
+damage, health, armor = 0, 0, 0
 string_for_print = ''
 for key, value in dict.items():
     val = sorted(value.items(), key=lambda kvp: kvp[0])
