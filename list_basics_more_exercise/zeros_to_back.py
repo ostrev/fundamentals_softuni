@@ -1,10 +1,9 @@
-input_string = input().split(', ')
-count = 0
-input_string = list(map(int, input_string))
+data = input().split(', ')
+counter = 0
+while '0' in data:
+    data.remove('0')
+    counter += 1
+for _ in range(counter):
+    data.append('0')
 
-while 0 in input_string:
-    input_string.remove(0)
-    count += 1
-for value in range(count):
-    input_string.append(0)
-print(input_string)
+print([int(s) for s in data])

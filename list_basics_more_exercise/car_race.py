@@ -1,28 +1,25 @@
-numbers = input().split()
-numbers = list(map(int, numbers))
-mid_len = len(numbers) // 2
+def check_list(list_of_car):
+    car_sum = 0
+    for number in list_of_car:
+        if number == 0:
+            car_sum *= 0.8
+        car_sum += number
+    return car_sum
 
-left_car_time = 0
-right_car_time = 0
 
-left_list = numbers[0:mid_len]
-right_list = numbers[len(numbers):mid_len: -1]
+list_of_race = [int(s) for s in input().split()]
+middle_index = len(list_of_race) // 2
+left_car = list_of_race[0:middle_index]
+right_car = list_of_race[len(list_of_race):middle_index:-1]
+
+left_car_sum = check_list(left_car)
+right_car_sum = check_list(right_car)
+
 winner = ''
-for car in left_list:
-    if car == 0:
-        left_car_time = left_car_time*0.8
-    else:
-        left_car_time += car
-for car in right_list:
-    if car == 0:
-        right_car_time = right_car_time*0.8
-    else:
-        right_car_time += car
-if right_car_time > left_car_time:
+if left_car_sum < right_car_sum:
     winner = 'left'
-    total_time = left_car_time
+    total_time = left_car_sum
 else:
     winner = 'right'
-    total_time = right_car_time
-
-print(f'The winner is {winner} with total time: {total_time:.1f}')
+    total_time = right_car_sum
+print(f"The winner is {winner} with total time: {total_time:.1f}")
