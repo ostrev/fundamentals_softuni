@@ -1,0 +1,31 @@
+command = input()
+total = 0
+taxes = 0
+is_special = False
+while True:
+    if command == 'special':
+        is_special = True
+        break
+    elif command == 'regular':
+        break
+    elif float(command) <= 0:
+        print("Invalid price!")
+    else:
+        total += float(command)
+    command = input()
+
+
+taxes = (total * 1.2) - total
+total_price = total + taxes
+
+if is_special:
+    total_price = total_price * 0.9
+
+if total_price == 0:
+    print("Invalid order!")
+else:
+    print("Congratulations you've just bought a new computer!")
+    print(f"Price without taxes: {total:.2f}$")
+    print(f'Taxes: {taxes:.2f}$')
+    print('-----------')
+    print(f'Total price: {total_price:.2f}$')
