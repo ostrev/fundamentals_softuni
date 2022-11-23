@@ -1,16 +1,8 @@
 import re
-
-name = input()
-
-while name:
-
-
-    result = []
-    pattern = r'\d+'
-
-    matches = re.finditer(pattern, name)
-
+pattern = r'\d+'
+line = input()
+while line:
+    matches = re.findall(pattern, line)
     for match in matches:
-        print(match.group(0), end=" ")
-
-    name = input()
+        print(match, end=" ")
+    line = input()
