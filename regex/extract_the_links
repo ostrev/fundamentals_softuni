@@ -1,0 +1,8 @@
+import re
+pattern = r'www\.[a-zA-Z0-9\-]+(\.[a-z]+)+'
+line = input()
+while line:
+    matches = re.finditer(pattern, line)
+    for match in matches:
+        print(match.group())
+    line = input()
