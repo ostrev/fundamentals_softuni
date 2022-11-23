@@ -1,0 +1,10 @@
+import re
+name = input()
+result = []
+pattern = r'\b(?P<day>\d{2})(?P<separator>/|.|-)(?P<month>[A-Z][a-z]{2})(?P=separator)(?P<year>\d{4})\b'
+
+matches = re.finditer(pattern, name)
+
+for match in matches:
+    result = match.groupdict()
+    print(f"Day: {result['day']}, Month: {result['month']}, Year: {result['year']}")
