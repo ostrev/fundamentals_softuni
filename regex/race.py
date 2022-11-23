@@ -26,9 +26,9 @@ while command != 'end of race':
     name = ''
     distance.clear()
     command = input()
-sorted_dict = dict(sorted(race_dictionary.items(), key=lambda kvp: kvp[1]))
-result = list(sorted_dict.keys())
+result = sorted(race_dictionary.items(), key=lambda kvp: kvp[1], reverse=True)
 
-print(f'1st place: {result[0]}')
-print(f'2nd place: {result[1]}')
-print(f'3rd place: {result[2]}')
+
+print(f'1st place: {result[0][0]}')
+print(f'2nd place: {result[1][0]}')
+print(f'3rd place: {result[2][0]}')
