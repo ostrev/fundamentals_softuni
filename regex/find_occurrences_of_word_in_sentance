@@ -1,0 +1,8 @@
+import re
+name = input().lower()
+word = input().lower()
+pattern = rf'\b{word}\b'
+matches = re.findall(pattern, name)
+
+print(len(matches))
+
